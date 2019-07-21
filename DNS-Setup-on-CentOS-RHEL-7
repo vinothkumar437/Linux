@@ -1,0 +1,102 @@
+Pre-Requesties
+---------------
+1. Install the CentOS 7.X 
+2. Add the Hostname and Host Entry File.
+3. Stop and Disable Firewalld.
+4. Update the Kernel.
+
+
+In my case, DNS server domain name dns-server.example.com
+
+Step 01: Install bind on the machine
+
+# yum -y install bind*
+
+Step 02: Edit the /etc/named.conf file
+
+# vim /etc/named.conf
+
+options {
+    listen-on port 53 { any; };
+    listen-on-v6 port 53 { any; };
+    directory     "/var/named";
+    dump-file     "/var/named/data/cache_dump.db";
+    statistics-file "/var/named/data/named_stats.txt";
+    memstatistics-file "/var/named/data/named_mem_stats.txt";
+    allow-query     { any; };
+
+zone "example.com" IN {
+    type master;
+    file "dynamic/example.com.db";
+};
+
+zone "cloudapps.example.com" IN {
+    type master;
+    file "dynamic/cloudapps.example.com.db";
+};
+
+include "/etc/named.rfc1912.zones";
+include "/etc/named.root.key";
+
+Step 03: Create the file example.com.db
+
+#   vim /var/named/example.com.db
+
+$ORIGIN .
+$TTL 1 ; 1 seconds (for testing only)
+example.com       IN SOA  dns-server.example.com. hostmaster.example.com. (
+            2011112904 ; serial
+            60         ; refresh (1 minute)
+            15         ; retry (15 seconds)
+            1800       ; expire (30 minutes)
+            10         ; minimum (10 seconds)
+            )
+        NS  dns-server.example.com.
+        MX  10 mail.example.com.
+$ORIGIN example.com.
+dns-server         A   x.x.x.x
+ose-master         A   y.y.y.y
+ose-node1          A   x.x.x.x
+ose-node2          A   z.z.z.z
+
+Step 04: Create the file cloudapss.example.com.db
+
+#   vim /var/named/cloudapps.example.com.db
+
+$ORIGIN .
+$TTL 1 ; 1 seconds (for testing only)
+cloudapps.example.com       IN SOA  dns-server.cloudapps.example.com. hostmaster.cloudapps.example.com. (
+            2011112904 ; serial
+            60         ; refresh (1 minute)
+            15         ; retry (15 seconds)
+            1800       ; expire (30 minutes)
+            10         ; minimum (10 seconds)
+            )
+        NS  dns-server.cloudapps.example.com.
+        MX  10 mail.cloudapps.example.com.
+$ORIGIN cloudapps.example.com.
+*           A   x.x.y.z
+
+Step 05: After finishing this, Change permissions on the /etc/named.conf file 
+
+#   chmod 644 /etc/named.conf
+
+Step 06: we need to restart and start some services and enable them to survive reboot
+
+#   systemctl start named
+#   systemctl enable named
+
+Step 07: To resolve any host to use this DNS server. Simply edit your /etc/resolv.conf and add as below 
+
+#   vim /etc/resolv.conf
+
+nameserver <DNS-server-ip>
+
+Step 08: Also, It is good to have the hostnames and ip's in /etc/hosts file
+
+#   vim /etc/hosts
+
+ip <hostname>
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
