@@ -1,0 +1,3 @@
+[root@test-01 users]# df -hT /users | awk '{print $6}' | sed -n '2p'
+77%
+[root@test-01 users]#
