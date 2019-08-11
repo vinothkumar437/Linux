@@ -1,129 +1,124 @@
-[root@localhost facts.d]# free -m
+[root@localhost ~]# free -m
               total        used        free      shared  buff/cache   available
 Mem:           1819         326          68           1        1425        1301
 Swap:          8191          42        8149
-[root@localhost facts.d]#
+[root@localhost ~]#
 
 This will report the percentage of memory in use
-[root@localhost facts.d]# free | grep Mem | awk '{print $3/$2 * 100.0}'
+[root@localhost ~]# free | grep Mem | awk '{print $3/$2 * 100.0}'
 17.9572
-[root@localhost facts.d]#
+[root@localhost ~]#
 
 This will report the percentage of memory that's free
-[root@localhost facts.d]# free | grep Mem | awk '{print $4/$2 * 100.0}'
+[root@localhost ~]# free | grep Mem | awk '{print $4/$2 * 100.0}'
 4.01298
-[root@localhost facts.d]#
+[root@localhost ~]#
 
 
 This will report the percentage of memory that's buff/cache
-[root@localhost facts.d]# free | grep Mem | awk '{print $6/$2 * 100.0}'
+[root@localhost ~]# free | grep Mem | awk '{print $6/$2 * 100.0}'
 78.5386
-[root@localhost facts.d]#
-[root@localhost facts.d]#
+[root@localhost ~]#
+[root@localhost ~]#
 
-[root@localhost facts.d]# cat cpu.fact
+[root@localhost ~]# cat cpu.fact
 #!/bin/bash
 cpu_usage=$(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}')
 echo "{\"Cpu_Usage\":\"${cpu_usage}\"}"
 
-[root@localhost facts.d]#
-[root@localhost facts.d]# sh cpu.fact
+[root@localhost ~]#
+[root@localhost ~]# sh cpu.fact
 {"Cpu_Usage":"3.24219%"}
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]# cat process.fact
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# cat process.fact
 #!/bin/bash
 process_count=$(ps -aux | wc -l)
 echo "{\"process_count\":\"${process_count}\"}"
 
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]# sh process.fact
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# sh process.fact
 {"process_count":"185"}
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]# cat last.fact
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# cat last.fact
 #!/bin/bash
 last_login=$(last | head -n 1)
 
 echo "{\"last_login\":\"${last_login}\"}"
-[root@localhost facts.d]#
-[root@localhost facts.d]# sh last.fact
+[root@localhost ~]#
+[root@localhost ~]# sh last.fact
 {"last_login":"root     pts/3        192.168.1.106    Sun Aug 11 12:33 - 12:33  (00:00)    "}
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]# cat last1.fact
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# cat last1.fact
 #!/bin/bash
 last_login1=$(last | head -n 2 | tail -n 1)
 
 echo "{\"last_login1\":\"${last_login1}\"}"
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]# sh last1.fact
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# sh last1.fact
 {"last_login1":"root     pts/3        192.168.1.106    Sun Aug 11 12:32 - 12:33  (00:00)    "}
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]# cat last2.fact
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# cat last2.fact
 #!/bin/bash
 last_login2=$(last | head -n 3 | tail -n 1)
 
 echo "{\"last_login2\":\"${last_login2}\"}"
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]# sh last2.fact
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# sh last2.fact
 {"last_login2":"root     pts/1        192.168.1.101    Sun Aug 11 12:19   still logged in   "}
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]# cat last3.fact
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# cat last3.fact
 #!/bin/bash
 last_login3=$(last | head -n 4 | tail -n 1)
 
 echo "{\"last_login3\":\"${last_login3}\"}"
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]# sh last3.fact
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# sh last3.fact
 {"last_login3":"root     pts/0        192.168.1.101    Sun Aug 11 12:15   still logged in   "}
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]# cat last4.fact
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# cat last4.fact
 #!/bin/bash
 last_login4=$(last | head -n 5 | tail -n 1)
 
 echo "{\"last_login4\":\"${last_login4}\"}"
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]# sh last4.fact
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# sh last4.fact
 {"last_login4":"root     pts/3        192.168.1.106    Sun Aug 11 11:22 - 11:22  (00:00)    "}
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]# cat last5.fact
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# cat last5.fact
 #!/bin/bash
 last_login5=$(last | head -n 6 | tail -n 1)
 
 echo "{\"last_login5\":\"${last_login5}\"}"
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-[root@localhost facts.d]# sh last5.fact
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# sh last5.fact
 {"last_login5":"root     pts/3        192.168.1.106    Sun Aug 11 11:22 - 11:22  (00:00)    "}
-[root@localhost facts.d]#
-[root@localhost facts.d]#
-
-
-
-
-
+[root@localhost ~]#
+[root@localhost ~]#
