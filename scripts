@@ -122,3 +122,18 @@ echo "{\"last_login5\":\"${last_login5}\"}"
 {"last_login5":"root     pts/3        192.168.1.106    Sun Aug 11 11:22 - 11:22  (00:00)    "}
 [root@localhost ~]#
 [root@localhost ~]#
+[root@localhost ~]$
+[root@localhost ~]$ sh uptime.fact
+{"uptime":"90 days"}
+[root@localhost ~]$
+[root@localhost ~]$
+[root@localhost ~]$
+[root@localhost ~]$
+[root@localhost ~]$ cat uptime.fact
+#!/bin/bash
+uptime=$(uptime | awk -F'( |,|:)+' '{print $6,$7}')
+
+echo "{\"uptime\":\"${uptime}\"}"
+
+[root@localhost ~]$
+[root@localhost ~]$
