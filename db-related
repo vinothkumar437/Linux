@@ -1,0 +1,282 @@
+insert into database2.table2 (select * from database1.table1)
+
+CREATE OR REPLACE VIEW DETAILS
+AS SELECT 
+* FROM
+(
+SELECT 
+    T1.ID,
+    T1.AMOUNT,
+    T1.STATUS,
+    T1.ADDEDBY,
+    T1.ADDEDON,
+    'T1' tableID
+FROM Table1 T1
+UNION ALL
+SELECT 
+    T2.ID,
+    T2.AMOUNT,
+    T2.STATUS,
+    T2.ADDEDBY,
+    T2.ADDEDON,
+    'T2' tableID
+FROM Table2 T2
+UNION ALL
+SELECT
+    T3.ID,
+    T3.BILLAMOUNT,
+    T3.STATUS,
+    T3.ADDEDBY,
+    T3.ADDEDON,
+    'T3' tableID  
+FROM Table3 T3
+);
+
+
+
+[root@localhost ~]#
+[root@localhost ~]# mysql
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 2
+Server version: 5.5.64-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]>
+MariaDB [(none)]>
+MariaDB [(none)]> create database db01
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]>
+MariaDB [(none)]> use db01;
+Database changed
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> create table table01(name varchar(100), email varchar(100));
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]> select * from table01;
+Empty set (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> insert into table01(name,email)values('abc','abc@local.com');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> select * from table01;
++------+---------------+
+| name | email         |
++------+---------------+
+| abc  | abc@local.com |
++------+---------------+
+1 row in set (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> insert into table01(name,email)values('def','def@local.com');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]> select * from table01;
++------+---------------+
+| name | email         |
++------+---------------+
+| abc  | abc@local.com |
+| def  | def@local.com |
++------+---------------+
+2 rows in set (0.00 sec)
+
+MariaDB [db01]> create view view01 select * from table01;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from table01' at line 1
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> create view view01 select * from table01
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from table01' at line 1
+MariaDB [db01]>
+MariaDB [db01]> create view view01 select * from table01 where name='abc';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from table01 where name='abc'' at line 1
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> create view view01 select * from table01 where name = "abc";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from table01 where name = "abc"' at line 1
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> create view view01 as select * from table01;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> select * from view01;
++------+---------------+
+| name | email         |
++------+---------------+
+| abc  | abc@local.com |
+| def  | def@local.com |
++------+---------------+
+2 rows in set (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]> select * into a from view01;
+ERROR 1327 (42000): Undeclared variable: a
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> select * into table02 from view01;
+ERROR 1327 (42000): Undeclared variable: table02
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> create table table02(name varchar(100), email varchar(100), flag varchar(100));
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> select * into table02 from view01;
+ERROR 1327 (42000): Undeclared variable: table02
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> SELECT * INTO table02 FROM view01;
+ERROR 1327 (42000): Undeclared variable: table02
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> SELECT *  FROM view01;
++------+---------------+
+| name | email         |
++------+---------------+
+| abc  | abc@local.com |
+| def  | def@local.com |
++------+---------------+
+2 rows in set (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]> insert into db01.table02 (select * from db01.view01)
+    -> ;
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> insert into db01.table02(name,email)values(select * from db01.view01);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from db01.view01)' at line 1
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> insert into table02(name,email)values(select * from view01);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from view01)' at line 1
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> insert into table02(name,email)values(select * from view01;);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from view01' at line 1
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> insert into db01.table02 (select * from db01.view01);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> insert into db01.table02 (select name,email from db01.view01);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [db01]>
+MariaDB [db01]> insert into db01.table02(name,email) (select name,email from db01.view01);
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [db01]>
+MariaDB [db01]> select * from table02;
++------+---------------+------+
+| name | email         | flag |
++------+---------------+------+
+| abc  | abc@local.com | NULL |
+| def  | def@local.com | NULL |
++------+---------------+------+
+2 rows in set (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]> insert into table02(name,email,flag)values('ghi','ghi@local.com','yes');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]> select * from table02;
++------+---------------+------+
+| name | email         | flag |
++------+---------------+------+
+| abc  | abc@local.com | NULL |
+| def  | def@local.com | NULL |
+| ghi  | ghi@local.com | yes  |
++------+---------------+------+
+3 rows in set (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> select * from table02 where flag='NULL';
+Empty set (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]>
+MariaDB [db01]> select * from table02 where flag=yes';
+    '> Ctrl-C -- exit!
+Aborted
+[root@localhost ~]#
+[root@localhost ~]# mysql
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 5.5.64-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]>
+MariaDB [(none)]> use db01;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [db01]>
+MariaDB [db01]> select * from table02 where flag='yes';
++------+---------------+------+
+| name | email         | flag |
++------+---------------+------+
+| ghi  | ghi@local.com | yes  |
++------+---------------+------+
+1 row in set (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]> select * from table02 where flag='';
+Empty set (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]> select * from table02 where flag=' ';
+Empty set (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]> select * from table02 where flag='NULL';
+Empty set (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]> select * from table02 where flag is'NULL';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''NULL'' at line 1
+MariaDB [db01]> select * from table02 where flag is 'NULL';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''NULL'' at line 1
+MariaDB [db01]>
+MariaDB [db01]> select * from table02 where flag is NULL;
++------+---------------+------+
+| name | email         | flag |
++------+---------------+------+
+| abc  | abc@local.com | NULL |
+| def  | def@local.com | NULL |
++------+---------------+------+
+2 rows in set (0.00 sec)
+
+MariaDB [db01]>
+MariaDB [db01]>
