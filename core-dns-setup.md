@@ -89,4 +89,24 @@ zone "1.168.192.in-addr.arpa" {
 };
 </pre>
 
+<li>Edit the /var/named/example.com.zone forward zone file</li>
+<pre>
+$TTL 86400
+@   IN  SOA     k8sdns.example.com. root.example.com. (
+        2011071001  ;Serial
+        3600        ;Refresh
+        1800        ;Retry
+        604800      ;Expire
+        86400       ;Minimum TTL
+)
+@       IN  NS          k8sdns.example.com.
+@       IN  A           192.168.1.219
+@       IN  A           192.168.1.220
+@       IN  A           192.168.1.221
+@       IN  A           192.168.1.222
+@       IN  A           192.168.1.223
+k8sdns              IN  A   192.168.1.219
+k8shaproxy          IN  A   192.168.1.220
+</pre>
+
 </ol>
