@@ -1,6 +1,6 @@
-<h3>DNS Setup on CentOS 7 / RHEL 7</h3>
+<h1>DNS Setup on CentOS 7 / RHEL 7</h1>
 
-1. <h4> Install the Bind package</h4>
+<h3>Install the Bind package</h3>
 <pre>
 yum install bind* -y
 </pre>
