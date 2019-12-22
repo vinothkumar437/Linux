@@ -68,29 +68,29 @@ defaults
 #---------------------------------------------------------------------
 #main frontend which proxys to the backends
 #---------------------------------------------------------------------
-frontend ingress-http
+frontend apache-http
     bind *:80
-    default_backend ingress-http
+    default_backend apache-http
     mode http
     option tcplog
 
-backend ingress-http
+backend apache-http
     balance source
     mode http
-    server worker0 192.168.1.222:80 check
-    server worker1 192.168.1.223:80 check
+    server server0 x.x.x.x:80 check
+    server server1 x.x.x.x:80 check
 
-frontend ingress-https
+frontend apache-https
     bind *:443
-    default_backend ingress-https
+    default_backend apache-https
     mode http
     option tcplog
 
-backend ingress-https
+backend apache-https
     balance source
     mode http
-    server worker0 192.168.1.222:443 check
-    server worker1 192.168.1.223:443 check
+    server server0 192.168.1.222:443 check
+    server server1 192.168.1.223:443 check
   </pre>
 </ol>
  
