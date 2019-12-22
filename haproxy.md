@@ -89,8 +89,8 @@ frontend apache-https
 backend apache-https
     balance source
     mode http
-    server server0 192.168.1.222:443 check
-    server server1 192.168.1.223:443 check
+    server server0 x.x.x.x:443 check
+    server server1 x.x.x.x:443 check
   </pre>
   <li> Enable and start the haproxy service </li>
   <pre>systemctl enable haproxy.service</pre>
