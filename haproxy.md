@@ -6,4 +6,4 @@
 <pre>
 yum install bind* -y
 </pre>
-<ol>
+</ol>
