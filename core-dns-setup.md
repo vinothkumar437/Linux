@@ -150,11 +150,12 @@ nameserver 192.168.1.1
 [root@localhost ~]# nslookup k8shaproxy.example.com
 Server:         192.168.1.219
 Address:        192.168.1.219#53
-
+<br/>
 Name:   k8shaproxy.example.com
 Address: 192.168.1.220
 [root@localhost ~]#
 </pre>
+
 <pre>
 C:\Users\Vinothkumar Palani>nslookup k8shaproxy.example.com
 Server:  k8sdns.example.com
