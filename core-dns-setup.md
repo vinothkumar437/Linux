@@ -147,6 +147,16 @@ nameserver 192.168.1.1
 220.1.168.192.in-addr.arpa      name = k8shaproxy.example.com.
 </pre>
 <pre>
+[root@localhost ~]# nslookup k8shaproxy.example.com
+Server:         192.168.1.219
+Address:        192.168.1.219#53
+
+Name:   k8shaproxy.example.com
+Address: 192.168.1.220
+
+[root@localhost ~]#
+</pre>
+<pre>
 C:\Users\Vinothkumar Palani>nslookup k8shaproxy.example.com
 Server:  k8sdns.example.com
 Address:  192.168.1.219
