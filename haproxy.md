@@ -2,9 +2,7 @@
 
 <ol>
   <li>Install the package</li>
-  <pre>
-  yum install haproxy -y
-  </pre>
+  <pre>yum install haproxy -y</pre>
   <li>Edit the configuration file /etc/haproxy/haproxy.conf</li>
   <pre>
   #---------------------------------------------------------------------
