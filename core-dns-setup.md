@@ -153,7 +153,6 @@ Address:        192.168.1.219#53
 
 Name:   k8shaproxy.example.com
 Address: 192.168.1.220
-
 [root@localhost ~]#
 </pre>
 <pre>
