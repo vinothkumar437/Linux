@@ -14,9 +14,8 @@
 #   http://haproxy.1wt.eu/download/1.4/doc/configuration.txt
 #
 #---------------------------------------------------------------------
-
 #---------------------------------------------------------------------
-## Global settings
+#Global settings
 #---------------------------------------------------------------------
 global
     # to have these messages end up in /var/log/haproxy.log you will
@@ -45,8 +44,8 @@ global
     stats socket /var/lib/haproxy/stats
 
 #---------------------------------------------------------------------
-## common defaults that all the 'listen' and 'backend' sections will
-## use if not designated in their block
+#common defaults that all the 'listen' and 'backend' sections will
+#use if not designated in their block
 #---------------------------------------------------------------------
 defaults
     mode                    http
@@ -67,7 +66,7 @@ defaults
     maxconn                 3000
 
 #---------------------------------------------------------------------
-## main frontend which proxys to the backends
+#main frontend which proxys to the backends
 #---------------------------------------------------------------------
 frontend ingress-http
     bind *:80
