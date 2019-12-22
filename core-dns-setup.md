@@ -157,14 +157,13 @@ Address: 192.168.1.220
 </pre>
 
 <pre>
-C:\Users\Vinothkumar Palani>nslookup k8shaproxy.example.com
+C:\Users\Vinothkumar>nslookup k8shaproxy.example.com
 Server:  k8sdns.example.com
 Address:  192.168.1.219
 
 Name:    k8shaproxy.example.com
 Address:  192.168.1.220
 
-C:\Users\Vinothkumar Palani>
+C:\Users\Vinothkumar>
 </pre>
-
 </ol>
