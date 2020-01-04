@@ -2,5 +2,6 @@
 <ol>
   <li>Install the dhcp package</li>
   <pre>yum install dhcp* -y</pre>
-  <li></li>
+  <li>Copy the dhcp conf file</li>
+  <pre>cp /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example /etc/dhcp/dhcpd.conf</pre>
 </ol>
