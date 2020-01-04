@@ -111,4 +111,7 @@ host coreos {
  #}
 #}
 </pre>
+<li> Enable and Start the service </li>
+<pre> systemctl enable dhcpd.service</pre>
+<pre> systemctl start dhcpd.service </pre>
 </ol>
