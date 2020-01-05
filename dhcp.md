@@ -80,11 +80,12 @@ subnet 192.168.1.0 netmask 255.255.255.0 {
 #be booted with DHCP, unless there is an address range on the subnet
 #to which a BOOTP client is connected which has the dynamic-bootp flag
 #set.
-host coreos {
-  hardware ethernet 00:0C:29:A0:23:54;
-  fixed-address 192.168.1.192;
+host bastion.ocp4.openshift.com {
+  hardware ethernet 00:50:56:28:4F:DD;
+  fixed-address 192.168.1.88;
+  server-name "bastion.ocp4.openshift.com";
+  option host-name "bastion.ocp4.openshift.com";
 }
-
 #You can declare a class of clients and then do address allocation
 #based on that.   The example below shows a case where all clients
 #in a certain class get addresses on the 10.17.224/24 subnet, and all
