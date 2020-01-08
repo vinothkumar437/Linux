@@ -1,3 +1,7 @@
+
+touch $( date '+%Y-%m-%d_%H-%M-%S' )
+
+
 [root@localhost ~]# free -m
               total        used        free      shared  buff/cache   available
 Mem:           1819         326          68           1        1425        1301
