@@ -4,4 +4,5 @@
 <ol>
   <li>Fully working DNS server</li>
   <li>Fully working DHCP server</i>
+  <li>Apache server</li>
 </ol>
