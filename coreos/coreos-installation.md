@@ -1,1 +1,1 @@
-<h2>CoresOS Installtion </h2>
+<h2>CoresOS Installation </h2>
