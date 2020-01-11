@@ -1,0 +1,25 @@
+{
+  "ignition": {
+    "config": {},
+    "timeouts": {},
+    "version": "2.1.0"
+  },
+  "networkd": {},
+  "passwd": {
+    "users": [
+      {
+        "groups": [
+          "sudo",
+          "docker"
+        ],
+        "name": "demo",
+        "passwordHash": "$1$bZGE55kp$VSkqtcEZoAc3nXEAfiw9C0",
+        "sshAuthorizedKeys": [
+          "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQBT/iY8JOFjbfOQtI/1URZ34GIX+3/5q/aJHZbOgetHjHuMUe/q8wC4VWr48PrxcdI5dcSvZaRQxWUh1KHK7iewWXQeESvRWl5TOssO6n1Q/g1mcv45gEvrLa9/fAWqODXbP+z0HChw0RBb9vJgSvFq1aOiw6scx5WX66jWTEWkxKlsgPtxqWNA8HJSij5X3HDbEDylPgDA5P7OH/Tqfud41tBhEox+CHMuXWjZm9bo+r76/RwHuiTGm51R0UOrrs5d5/zfWknTcxD9R+BiuI1DucMPLANAAcmnqSxKLFA7vPCUBl7I2QzKJ2mZZQnjCdCwFsDgJt19pXoxdzixCkSp rsa-key-CoreOS"
+        ]
+      }
+    ]
+  },
+  "storage": {},
+  "systemd": {}
+}
