@@ -1,1 +1,7 @@
 https://serverfault.com/questions/611120/failed-tls-handshake-does-not-contain-any-ip-sans
+
+
+
+rpcbind fails to start with IPv6 disabled
+
+https://access.redhat.com/solutions/2798411
