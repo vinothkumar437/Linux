@@ -30,3 +30,6 @@ named arg: an_arg: foo
 named arg: some_more_args: bar
 named arg: yet_more_args: a default value
 ````
+
+
+<a href="https://github.com/mattbryson/bash-arg-parse">Click Here</a> for more information
